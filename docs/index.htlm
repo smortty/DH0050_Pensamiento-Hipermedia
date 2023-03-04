@@ -1,6 +1,8 @@
 <html>
   <head>
     <title>artefacto hipermedia
+        <script src="p5.min.js"></script>
+    <script src="sketch.js"></script>
    </head>
    <body>
     <h1>
