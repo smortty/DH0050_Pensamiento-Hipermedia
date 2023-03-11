@@ -1,40 +1,50 @@
-function setup() {
-  createCanvas(720, 400);
+
+// Where is the car
+let x, y;
+class Carro{
+  constructor(alto,ancho,color,name){
+    this.alto = alto;
+    this.ancho = ancho;
+    this.color = color;
+    this.name = name;
+  }
 }
+function setup() {
+  createCanvas(700, 500);
+  // Start position
+  y = height - height/4;
+  x = 0;
+  // crear una instancia de Carro llamada Lambo
+  let lambo = new Carro (10,20,blue,"lambo")
+  console.log("lambo ancho es " + lambo.ancho);
+  console.log("lambo alto es " + lambo.alto);
+  console.log("lambo color es " + lambo.color);
+  console.log("lambo name es " + lambo.name);
+}
+
 
 function draw() {
-  background(102);
-
-  push();
-  translate(width * 0.2, height * 0.5);
-  rotate(frameCount / 200.0);
-  star(0, 0, 5, 70, 3);
-  pop();
-
-  push();
-  translate(width * 0.5, height * 0.5);
-  rotate(frameCount / 50.0);
-  star(0, 0, 80, 100, 40);
-  pop();
-
-  push();
-  translate(width * 0.8, height * 0.5);
-  rotate(frameCount / -100.0);
-  star(0, 0, 30, 70, 5);
-  pop();
+  background(20,200,150);  
+  display();
+  move();
+}  
+function move(){
+  // Jiggling randomly
+  y = y + random(-2, 2);
+  
+  if (x > width) {
+    // Reset 
+    x = 0;
+    y = height - height/4;
+  } else {
+    // Moving up at a constant speed
+    x = x + 2;
+  }
 }
 
-function star(x, y, radius1, radius2, npoints) {
-  let angle = TWO_PI / npoints;
-  let halfAngle = angle / 2.0;
-  beginShape();
-  for (let a = 0; a < TWO_PI; a += angle) {
-    let sx = x + cos(a) * radius2;
-    let sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a + halfAngle) * radius1;
-    sy = y + sin(a + halfAngle) * radius1;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
+function display(){
+  // Draw a car
+  stroke(220,200,200);
+  fill(220,80,200);
+  rect(x, y, 50, 30);
 }
